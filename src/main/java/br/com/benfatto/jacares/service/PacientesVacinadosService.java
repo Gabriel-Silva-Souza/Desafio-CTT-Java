@@ -1,7 +1,10 @@
 package br.com.benfatto.jacares.service;
 
+import br.com.benfatto.jacares.model.Municipio;
 import br.com.benfatto.jacares.model.PacientesVacinados;
 
-public interface PacientesVacinadosService extends BaseService<PacientesVacinados, Long> {
+import java.util.Date;
 
+public interface PacientesVacinadosService extends BaseService<PacientesVacinados, Long> {
+    PacientesVacinados findByMunicipioAndData(Municipio municipio, Date data);
 }
