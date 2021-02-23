@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface PacienteVacinadoRepository extends JpaRepository<PacientesVacinados, Long> {
     Optional<PacientesVacinados> findByMunicipioAndData(Municipio municipio, Date data);
-    Optional<PacientesVacinados> findByVacinaAndData(Vacina vacina, Date data);
+    Optional<List<PacientesVacinados>> findAllByVacinaAndData(Vacina vacina, Date data);
 }

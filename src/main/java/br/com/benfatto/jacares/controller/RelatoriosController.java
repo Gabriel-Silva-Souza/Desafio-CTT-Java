@@ -4,10 +4,9 @@ import br.com.benfatto.jacares.dto.*;
 import br.com.benfatto.jacares.mapper.RelatoriosMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/relatorios")
@@ -32,6 +31,11 @@ public class RelatoriosController {
     public ResponseEntity<RelatorioVacinaDTO> relatorioVacina(@RequestBody CreateRelatorioVacinaDTO dto){
         RelatorioVacinaDTO relatorioVacinaDTO = this.relatoriosMapper.relatorioVacinaDTO(dto);
         return new ResponseEntity<>(relatorioVacinaDTO, HttpStatus.FOUND);
+    }
+    @GetMapping("/vacinas")
+    public ResponseEntity<ListRelatorioVacinaDTO> relatorioVacinas(@RequestBody DateDTO periodo){
+        ListRelatorioVacinaDTO relatoriosVacinaDTO = this.relatoriosMapper.relatorioVacinasDTO(periodo.getData());
+        return new ResponseEntity<>(relatoriosVacinaDTO, HttpStatus.FOUND);
     }
 
 }

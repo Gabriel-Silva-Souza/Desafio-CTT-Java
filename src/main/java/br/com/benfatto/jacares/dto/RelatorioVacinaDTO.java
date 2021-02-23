@@ -1,5 +1,8 @@
 package br.com.benfatto.jacares.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,5 +13,8 @@ import lombok.Setter;
 @Setter(AccessLevel.PUBLIC)
 public class RelatorioVacinaDTO {
     public String vacina;
-    public Long totalVacinado;
+    @JsonProperty("total de vacinados")
+    public Integer totalVacinado;
+    @JsonProperty("registro de uso")
+    public Integer registrosDeUso;
 }

@@ -9,6 +9,9 @@ import br.com.benfatto.jacares.service.PacientesVacinadosService;
 import br.com.benfatto.jacares.service.VacinaService;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -34,10 +37,33 @@ public class RelatoriosMapper {
 
     public RelatorioVacinaDTO relatorioVacinaDTO(CreateRelatorioVacinaDTO dto){
         Vacina vacina = this.vacinaService.findByNome(dto.getVacina());
-        PacientesVacinados found= this.pacientesVacinadosService.findByVacinaAndData(vacina, dto.getData());
+        Integer quantidadeVacinados = 0;
+        List<PacientesVacinados> found= this.pacientesVacinadosService.findByVacinaAndData(vacina, dto.getData());
+        for(PacientesVacinados pacientesVacinados : found){
+            quantidadeVacinados += Math.toIntExact(pacientesVacinados.getVacinados());
+        }
         RelatorioVacinaDTO relatorio = new RelatorioVacinaDTO();
         relatorio.setVacina(dto.getVacina());
-        relatorio.setTotalVacinado(found.getVacinados());
+        relatorio.setTotalVacinado(quantidadeVacinados);
+        relatorio.setRegistrosDeUso(found.size());
+        return relatorio;
+    }
+
+    public  ListRelatorioVacinaDTO relatorioVacinasDTO(Date periodo){
+        List<Vacina> vacinas = this.vacinaService.findAll();
+        System.out.println(vacinas.size());
+        ArrayList<RelatorioVacinaDTO> listaRelatorio = new ArrayList<>();
+        for(Vacina vacina : vacinas){
+            CreateRelatorioVacinaDTO relatorioVacinaDTO = new CreateRelatorioVacinaDTO();
+            System.out.println(vacina.getNome());
+            relatorioVacinaDTO.setVacina(vacina.getNome());
+            relatorioVacinaDTO.setData(periodo);
+            RelatorioVacinaDTO relatorio = this.relatorioVacinaDTO(relatorioVacinaDTO);
+            System.out.println(relatorio.getVacina());
+            listaRelatorio.add(relatorio);
+        }
+        System.out.println(listaRelatorio.get(0));
+        ListRelatorioVacinaDTO relatorio = new ListRelatorioVacinaDTO(listaRelatorio);
         return relatorio;
     }
 

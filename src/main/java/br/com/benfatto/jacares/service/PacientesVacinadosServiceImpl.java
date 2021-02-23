@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class PacientesVacinadosServiceImpl extends BaseServiceImpl<PacientesVacinados, Long>
@@ -29,8 +30,8 @@ public class PacientesVacinadosServiceImpl extends BaseServiceImpl<PacientesVaci
     }
 
     @Override
-    public PacientesVacinados findByVacinaAndData(Vacina vacina, Date data) {
-        return this.pacienteVacinadoRepository.findByVacinaAndData(vacina, data)
+    public List<PacientesVacinados> findByVacinaAndData(Vacina vacina, Date data) {
+        return this.pacienteVacinadoRepository.findAllByVacinaAndData(vacina, data)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(
                         "Vacina %s com a data de vacinacao %s nao encontrado", vacina.getNome(), data.toString())));
     }
