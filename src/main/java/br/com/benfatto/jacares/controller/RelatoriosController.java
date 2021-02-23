@@ -1,9 +1,7 @@
 package br.com.benfatto.jacares.controller;
 
-import br.com.benfatto.jacares.dto.CreateRelatorioDTO;
-import br.com.benfatto.jacares.dto.RelatorioDTO;
+import br.com.benfatto.jacares.dto.*;
 import br.com.benfatto.jacares.mapper.RelatoriosMapper;
-import br.com.benfatto.jacares.service.MunicipioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +18,20 @@ public class RelatoriosController {
         this.relatoriosMapper = relatoriosMapper;
     }
 
-    @GetMapping()
-    public ResponseEntity<RelatorioDTO> relatorioMunicipio(@RequestBody CreateRelatorioDTO dto){
-        RelatorioDTO relatorioDTO = this.relatoriosMapper.relatorioMunicipio(dto.getData(), dto.getMunicipio());
-        return new ResponseEntity<>(relatorioDTO, HttpStatus.FOUND);
+    @GetMapping("/municipio")
+    public ResponseEntity<RelatorioMunicipioDTO> relatorioMunicipio(@RequestBody CreateRelatorioMunicipioDTO dto){
+        RelatorioMunicipioDTO relatorioMunicipioDTO = this.relatoriosMapper.relatorioMunicipio(dto);
+        return new ResponseEntity<>(relatorioMunicipioDTO, HttpStatus.FOUND);
     }
+    @GetMapping("/estado")
+    public ResponseEntity<RelatorioEstadoDTO> relatorioEstado(@RequestBody CreateRelatorioEstadoDTO dto){
+        RelatorioEstadoDTO relatorioEstadoDTO = this.relatoriosMapper.relatorioEstado(dto);
+        return new ResponseEntity<>(relatorioEstadoDTO, HttpStatus.FOUND);
+    }
+    @GetMapping("/vacina")
+    public ResponseEntity<RelatorioVacinaDTO> relatorioVacina(@RequestBody CreateRelatorioVacinaDTO dto){
+        RelatorioVacinaDTO relatorioVacinaDTO = this.relatoriosMapper.relatorioVacinaDTO(dto);
+        return new ResponseEntity<>(relatorioVacinaDTO, HttpStatus.FOUND);
+    }
+
 }

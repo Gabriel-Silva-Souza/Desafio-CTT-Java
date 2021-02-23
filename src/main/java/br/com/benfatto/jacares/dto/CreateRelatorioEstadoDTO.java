@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
-public class CreateRelatorioDTO {
-    private String municipio;
+public class CreateRelatorioEstadoDTO {
+    private String estado;
     private Date data;
 }

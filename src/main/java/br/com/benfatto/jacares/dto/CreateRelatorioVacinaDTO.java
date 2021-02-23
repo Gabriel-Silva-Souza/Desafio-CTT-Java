@@ -5,10 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @NoArgsConstructor
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)
-public class RelatorioDTO {
-    private String tipo;
-    private Long totalVacinados;
+public class CreateRelatorioVacinaDTO {
+    private String vacina;
+    private Date data;
 }
