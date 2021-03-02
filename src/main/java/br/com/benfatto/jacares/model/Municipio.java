@@ -26,11 +26,11 @@ public class Municipio {
     //Composicao de tabelas
 
     @ManyToOne
-    @JoinColumn(name="uf_id")
+    @JoinColumn(name="estado")
     private Estado estado;
 
     @OneToMany(mappedBy = "municipio")
-    public List<PacientesVacinados> vacinados;
+    private List<PacientesVacinados> vacinados;
 
 
 }
