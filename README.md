@@ -1,4 +1,4 @@
-## Projeto final CTT-Java
+## Projeto final CTT-Java.API
 
 ### Detalhes do sistema
 
